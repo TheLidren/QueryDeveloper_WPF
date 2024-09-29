@@ -1,14 +1,6 @@
-﻿using QueryDeveloper_WPF.Model;
-using System.Text;
+﻿
+using Microsoft.Win32;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QueryDeveloper_WPF
 {
@@ -28,6 +20,18 @@ namespace QueryDeveloper_WPF
         {
             ConnWindow connWindow = new(ConnDB);
             connWindow.Show();
+        }
+
+        private void OpenQuery_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                MessageBox.Show("File Open");
+        }
+
+        private void CloseQuery_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

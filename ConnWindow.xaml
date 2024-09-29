@@ -15,22 +15,21 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <Label Content="Название БД:"/>
-            <TextBox x:Name="Name"/>
+            <TextBox Name="nameBox"/>
             <Label Content="Описание:"/>
-            <TextBox x:Name="Description" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible"/>
+            <TextBox Name="descBox" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible"/>
             <Label Content="Строка подключения:"/>
-            <TextBox x:Name="ConnectionString" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible"/>
+            <TextBox Name="ConnectionString" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible"/>
             <Button Content="Добавить" HorizontalAlignment="Center" Padding="5" Margin="15" Click="AddConn_Click"/>
         </StackPanel>
-        <ListView Grid.Column="1" x:Name="ListConn">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Имя</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Description}">Описание</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionString}">Строка подключения</GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid Grid.Column="1" x:Name="ListConn" AutoGenerateColumns="False" RowEditEnding="EditConn_RowEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="0.25*" Binding="{Binding Path=Id}" Visibility="Collapsed" />
+                <DataGridTextColumn Header="Название" Width="0.25*" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Описание" Width="0.5*" Binding="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Строка подключения" Width="*" Binding="{Binding Path=ConnectionString, UpdateSourceTrigger=PropertyChanged}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

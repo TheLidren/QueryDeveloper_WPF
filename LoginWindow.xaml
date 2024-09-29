@@ -1,0 +1,24 @@
+﻿<Window x:Class="QueryDeveloper_WPF.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QueryDeveloper_WPF"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="300" Width="600">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" MinHeight="30px">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">WPF_Developer</TextBlock>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" MinHeight="30px">
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center">@TheLidren</TextBlock>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Left">
+            <Label Content="Имя" Margin="0"></Label>
+            <TextBox Name="loginBox" MinHeight="25px" MinWidth="200px"></TextBox>
+            <Label Content="Пароль" Margin="0"></Label>
+            <PasswordBox Name="passBox" MinHeight="25px"></PasswordBox>
+            <Button Content="Войти" HorizontalAlignment="Center" Padding="5" Margin="10" MinWidth="100px" Click="Login_Click"></Button>
+        </StackPanel>
+    </DockPanel>
+</Window>

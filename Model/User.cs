@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace QueryDeveloper_WPF.Model
 {
-    public class ConnModel
+    internal class User
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
-        public string ConnectionString { get; set; } = null!;
+        public string Surname { get; set; } = null!;
+        public string Login { get; set; } = null!;
+
+        public string Password { get; set; } = null!;
     }
 }

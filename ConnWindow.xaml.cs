@@ -1,17 +1,8 @@
-﻿using QueryDeveloper_WPF.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using QueryDeveloper_WPF.Model;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QueryDeveloper_WPF
 {
@@ -42,12 +33,20 @@ namespace QueryDeveloper_WPF
 
         private void AddConn_Click(object sender, RoutedEventArgs e)
         {
-            string[] values = {Name.Text, Description.Text, ConnectionString.Text };
+            string[] values = {nameBox.Text, descBox.Text, ConnectionString.Text };
             if (CheckedMethod(values)) 
             {
-                ConnDb.AddConnection(new ConnModel { Name = Name.Text, Description = Description.Text, ConnectionString = ConnectionString.Text});
+                ConnDb.AddConnection(new ConnModel { Name = nameBox.Text, Description = descBox.Text, ConnectionString = ConnectionString.Text});
                 ListConn.Items.Refresh();
             } 
+        }
+
+
+        private void EditConn_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            var editItem = e.Row.Item as ConnModel;
+            if (!ConnDb.UpdateConnection(editItem!))
+                e.Cancel = true;
         }
     }
 }
