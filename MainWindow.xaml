@@ -5,66 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QueryDeveloper_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid ShowGridLines="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="0.02*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button Click="OpenWindow_Click">Добавить conn</Button>
-            <Button Click="OpenWindow_Click">Выйти</Button>
-        </StackPanel>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.02*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <ListView Grid.Column="0">
-                <ListView.ContextMenu>
+        Title="MainWindow" Height="500" Width="900">
+    <Window.Resources>
+        <DataTemplate x:Key="ListViewItemContextMenu">
+            <DataGrid  MinHeight="170">
+                <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Открыть" Click="OpenQuery_Click"></MenuItem>
                         <MenuItem Header="Закрыть" Click="CloseQuery_Click"></MenuItem>
                     </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
-            <ListView Grid.Column="2">
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Открыть"></MenuItem>
-                        <MenuItem Header="Закрыть"></MenuItem>
-                    </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
-        </Grid>
-        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"></GridSplitter>
-        <Grid Grid.Row="3">
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </DataTemplate>
+        <DataTemplate x:Key="HeaderQuery">
+            <WrapPanel>
+                <Button Click="StartQuery_Click">Старт</Button>
+                <Button Click="StopQuery_Click">Стоп</Button>
+                <Menu>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                        </MenuItem.Header>
+                        <MenuItem Header="10" Click="MenuItem_Click"></MenuItem>
+                        <MenuItem Header="30" Click="MenuItem_Click"></MenuItem>
+                        <MenuItem Header="45" Click="MenuItem_Click"></MenuItem>
+                        <MenuItem Header="60" Click="MenuItem_Click"></MenuItem>
+                    </MenuItem>
+                </Menu>
+                <TextBlock Text="Название запроса" TextDecorations="None"></TextBlock>
+            </WrapPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="FooterQuery">
+            <TextBlock>Последнее время</TextBlock>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.01*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Панель управления-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3">
+            <Button>Пользователь</Button>
+            <Button Content="Строка подключения" Padding="2">
+            </Button>
+        </StackPanel>
+        
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="0.02*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ListView Grid.Column="0">
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Открыть"></MenuItem>
-                        <MenuItem Header="Закрыть"></MenuItem>
-                    </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.10*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.10*"/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+            </Grid>
+            <GridSplitter Grid.Column="2" HorizontalAlignment="Stretch"></GridSplitter>
+            <Grid Grid.Column="3" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.10*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.10*"/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+            </Grid>
+        </Grid>
+        <GridSplitter Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.02*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.10*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.10*"/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+            </Grid>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
-            <ListView Grid.Column="2">
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Открыть"></MenuItem>
-                        <MenuItem Header="Закрыть"></MenuItem>
-                    </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.10*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.10*"/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

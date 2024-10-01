@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QueryDeveloper_WPF.Model
+﻿namespace QueryDeveloper_WPF.Model
 {
     public class ConnModel
     {

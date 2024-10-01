@@ -7,6 +7,7 @@ namespace QueryDeveloper_WPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
     {
         ConnectionDB ConnDB = new();
@@ -30,6 +31,21 @@ namespace QueryDeveloper_WPF
         }
 
         private void CloseQuery_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StartQuery_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StopQuery_Click(object sender, RoutedEventArgs e)
         {
 
         }

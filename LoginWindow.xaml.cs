@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QueryDeveloper_WPF.Commands;
+using QueryDeveloper_WPF.Extensions;
+using QueryDeveloper_WPF.Model;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QueryDeveloper_WPF
 {
@@ -19,14 +10,34 @@ namespace QueryDeveloper_WPF
     /// </summary>
     public partial class LoginWindow : Window
     {
+        AppDbContext _appDbContext;
         public LoginWindow()
         {
             InitializeComponent();
+            _appDbContext = new AppDbContext();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            User? user = _appDbContext.Users.Where(u => u.Login == loginBox.Text && u.Password == passBox.Password.ToSHA256String()).FirstOrDefault();
+            if (user != null && user.Status)
+            {
+                MainWindow mainWindow = new();
+                mainWindow.Show();
+                this.Close();
+            }
+            else MessageBox.Show("Ошибка авторизации");
+
 
         }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e) => AdaptivePanelClass.SizeChanged(sender, e);
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new();
+            registerWindow.Show();
+        }
+
     }
 }
