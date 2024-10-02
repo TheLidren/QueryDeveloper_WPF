@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QueryDeveloper_WPF"
+        xmlns:command="clr-namespace:QueryDeveloper_WPF.Commands"
+        xmlns:viewmodel="clr-namespace:QueryDeveloper_WPF.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="900">
     <Window.Resources>
@@ -38,8 +40,11 @@
         <DataTemplate x:Key="FooterQuery">
             <TextBlock>Последнее время</TextBlock>
         </DataTemplate>
+        <command:OpenFormCommand x:Key="OpenFormCommand" />
+        <viewmodel:OpenFormViewModel x:Key="LogoutKey" NewWindow="QueryDeveloper_WPF.RegisterWindow" OldWindow="QueryDeveloper_WPF.MainWindow" CloseOldWindow="True" />
+        <viewmodel:OpenFormViewModel x:Key="ConnWindowOpen" NewWindow="QueryDeveloper_WPF.ConnWindow" OldWindow="QueryDeveloper_WPF.MainWindow" />
+        <viewmodel:OpenFormViewModel x:Key="UserWindowOpen" NewWindow="QueryDeveloper_WPF.UserWindow" OldWindow="QueryDeveloper_WPF.MainWindow" />
     </Window.Resources>
-
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -52,9 +57,9 @@
         </Grid.ColumnDefinitions>
         <!--Панель управления-->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3">
-            <Button>Пользователь</Button>
-            <Button Content="Строка подключения" Padding="2">
-            </Button>
+            <Button Content="Пользователь" Padding="2"  Command="{StaticResource OpenFormCommand}" CommandParameter="{StaticResource UserWindowOpen}" Click="OpenUser_Click"></Button>
+            <Button Content="Строка подключения" Padding="2" Command="{StaticResource OpenFormCommand}" CommandParameter="{StaticResource ConnWindowOpen }"></Button>
+            <Button Content="Выйти" Padding="2" Command="{StaticResource OpenFormCommand}" CommandParameter="{StaticResource LogoutKey}"></Button>
         </StackPanel>
         
         <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">

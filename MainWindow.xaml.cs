@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Win32;
+using QueryDeveloper_WPF.Model;
 using System.Windows;
 
 namespace QueryDeveloper_WPF
@@ -11,16 +12,12 @@ namespace QueryDeveloper_WPF
     public partial class MainWindow : Window
     {
         ConnectionDB ConnDB = new();
+        User CurrentUser;
 
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
-        }
-
-        private void OpenWindow_Click(object sender, RoutedEventArgs e)
-        {
-            ConnWindow connWindow = new(ConnDB);
-            connWindow.Show();
+            CurrentUser = user;
         }
 
         private void OpenQuery_Click(object sender, RoutedEventArgs e)
@@ -47,6 +44,13 @@ namespace QueryDeveloper_WPF
 
         private void StopQuery_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void OpenUser_Click(object sender, RoutedEventArgs e)
+        {
+            UserWindow userWindow = new(CurrentUser);
+            userWindow.Show();
 
         }
     }

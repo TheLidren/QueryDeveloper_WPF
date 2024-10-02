@@ -15,6 +15,7 @@ namespace QueryDeveloper_WPF
         {
             InitializeComponent();
             _appDbContext = new AppDbContext();
+            this.Resources["OpenForm"] = (title: "QueryDeveloper_WPF.RegisterWindow", closeWindow: true);
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -22,7 +23,7 @@ namespace QueryDeveloper_WPF
             User? user = _appDbContext.Users.Where(u => u.Login == loginBox.Text && u.Password == passBox.Password.ToSHA256String()).FirstOrDefault();
             if (user != null && user.Status)
             {
-                MainWindow mainWindow = new();
+                MainWindow mainWindow = new(user);
                 mainWindow.Show();
                 this.Close();
             }

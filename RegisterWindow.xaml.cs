@@ -23,18 +23,24 @@ namespace QueryDeveloper_WPF
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            User user = new()
+            if (confirmpassBox.Password == passBox.Password)
             {
-                Name = nameBox.Text,
-                Surname = surnameBox.Text,
-                Login = loginBox.Text,
-                Password = passBox.Password.ToSHA256String()
-            };
-            _appDbContext.Users.Add(user);
-            _appDbContext.SaveChanges();
-            MessageBox.Show("УЗ создана. Сообщите администратору для активации УЗ");
-            _loginWindow.Show();
-            this.Close();
+                User user = new()
+                {
+                    Name = nameBox.Text,
+                    Surname = surnameBox.Text,
+                    Login = loginBox.Text,
+                    Password = passBox.Password.ToSHA256String()
+                };
+                if (user != null && _appDbContext.Users.Where(u => u.Login == user.Login).FirstOrDefault() == null)
+                {
+                    _appDbContext.Users.Add(user);
+                    _appDbContext.SaveChanges();
+                    MessageBox.Show("УЗ создана. Сообщите администратору для активации УЗ");
+                    _loginWindow.Show();
+                    this.Close();
+                }
+            }
         }
     }
 }

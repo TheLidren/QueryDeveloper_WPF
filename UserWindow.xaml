@@ -1,17 +1,14 @@
-﻿<Window x:Class="QueryDeveloper_WPF.RegisterWindow"
+﻿<Window x:Class="QueryDeveloper_WPF.UserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QueryDeveloper_WPF"
         mc:Ignorable="d"
-        Title="RegisterWindow" MinHeight="450" MinWidth="600" Height="450" Width="600" SizeChanged="Window_SizeChanged">
+        Title="UserWindow" Height="350" Width="500"  SizeChanged="Window_SizeChanged">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" MinHeight="30px">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">WPF_Developer</TextBlock>
-        </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom" MinHeight="30px">
-            <TextBlock HorizontalAlignment="Center" TextAlignment="Center">@TheLidren</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">Изменение пользователя</TextBlock>
         </StackPanel>
         <StackPanel Margin="40 10" Name="AdaptiveStackPanel" DockPanel.Dock="Left" HorizontalAlignment="Left">
             <Label Content="Имя" Margin="0"></Label>
@@ -20,11 +17,9 @@
             <TextBox Name="surnameBox" MinHeight="25px" MinWidth="200px"></TextBox>
             <Label Content="Логин" Margin="0"></Label>
             <TextBox Name="loginBox" MinHeight="25px" MinWidth="200px"></TextBox>
-            <Label Content="Пароль" Margin="0"></Label>
+            <Label Content="Новый пароль" Margin="0"></Label>
             <PasswordBox Name="passBox" MinHeight="25px"></PasswordBox>
-            <Label Content="Подтвердите пароль" Margin="0"></Label>
-            <PasswordBox Name="confirmpassBox" MinHeight="25px"></PasswordBox>
-            <Button Content="Зарегестрироваться" Name="registerButton" HorizontalAlignment="Center" Margin="10" Padding="5" MinWidth="100px" Click="Register_Click"></Button>
+            <Button Content="Сохранить" Name="registerButton" HorizontalAlignment="Center" Margin="10" Padding="5" MinWidth="100px" Click="Save_Click"></Button>
         </StackPanel>
     </DockPanel>
 </Window>

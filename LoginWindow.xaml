@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QueryDeveloper_WPF"
+        xmlns:command="clr-namespace:QueryDeveloper_WPF.Commands"
+        xmlns:viewmodel="clr-namespace:QueryDeveloper_WPF.ViewModel"
         mc:Ignorable="d"
         Title="LoginWindow" MinHeight="300" MinWidth="600" Height="300" Width="600" SizeChanged="Window_SizeChanged">
+    <Window.Resources>
+        <command:OpenFormCommand x:Key="OpenFormCommand" />
+        <viewmodel:OpenFormViewModel x:Key="OpenFormViewModel" NewWindow="QueryDeveloper_WPF.RegisterWindow" OldWindow="QueryDeveloper_WPF.LoginWindow" CloseOldWindow="False" />
+    </Window.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" MinHeight="30px">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">WPF_Developer</TextBlock>
@@ -19,7 +25,7 @@
             <Label Content="Пароль" Margin="0"></Label>
             <PasswordBox Name="passBox" MinHeight="25px"></PasswordBox>
             <Button Content="Войти" Name="loginButton" HorizontalAlignment="Center" Padding="5" Margin="10" MinWidth="100px" Click="Login_Click"></Button>
-            <Button Content="Регистрация" Name="registerButton" HorizontalAlignment="Center" Padding="5" MinWidth="100px" Click="Register_Click"></Button>
+            <Button Content="Регистрация" Name="registerButton" HorizontalAlignment="Center" Padding="5" MinWidth="100px" Command="{StaticResource OpenFormCommand}" CommandParameter="{StaticResource OpenFormViewModel}"></Button>
         </StackPanel>
     </DockPanel>
 </Window>

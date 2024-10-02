@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace QueryDeveloper_WPF.Commands
 {
-    internal static class AdaptivePanelClass
+    public static class AdaptivePanelClass
     {
         internal static void SizeChanged(object sender, SizeChangedEventArgs e)
         {

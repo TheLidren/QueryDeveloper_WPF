@@ -5,8 +5,10 @@
 
     public class AppDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; } = null!;
-        public DbSet<UserQuery> Quires { get; set; } = null!;
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserQuery> Quires { get; set; }
+        public DbSet<ListConnection> Connections { get; set; }
+
 
         public AppDbContext()
         {

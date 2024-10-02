@@ -24,10 +24,10 @@ namespace QueryDeveloper_WPF
             return true;
         }
 
-        public ConnWindow(ConnectionDB db)
+        public ConnWindow()
         {
             InitializeComponent();
-            ConnDb = db;
+            ConnDb = new ConnectionDB();
             ListConn.ItemsSource = ConnDb.GetModels();
         }
 
@@ -36,7 +36,7 @@ namespace QueryDeveloper_WPF
             string[] values = {nameBox.Text, descBox.Text, ConnectionString.Text };
             if (CheckedMethod(values)) 
             {
-                ConnDb.AddConnection(new ConnModel { Name = nameBox.Text, Description = descBox.Text, ConnectionString = ConnectionString.Text});
+                ConnDb.AddConnection(new ListConnection { Name = nameBox.Text, Description = descBox.Text, ConnectionString = ConnectionString.Text});
                 ListConn.Items.Refresh();
             } 
         }
@@ -44,9 +44,13 @@ namespace QueryDeveloper_WPF
 
         private void EditConn_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            var editItem = e.Row.Item as ConnModel;
+            var editItem = e.Row.Item as ListConnection;
             if (!ConnDb.UpdateConnection(editItem!))
                 e.Cancel = true;
+            else
+            {
+
+            }
         }
     }
 }

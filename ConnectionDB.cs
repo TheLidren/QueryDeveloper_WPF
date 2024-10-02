@@ -6,19 +6,16 @@ namespace QueryDeveloper_WPF
 {
     public class ConnectionDB
     {
-        ConnModel? SelectModel;
-        List<ConnModel> _models = new() 
-        { 
-            new ConnModel() { Id = 1, Name = "LocalHost", Description = "Some Desc", ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True" },
-            new ConnModel() { Id = 2, Name = "Name 2", Description = "Some Desc", ConnectionString = "Some conn" }
-        };
+        ListConnection? SelectModel;
+        List<ListConnection> _models;
+
         public ConnectionDB()
         {
-            //_models = [];
+            _models = [];
             SelectModel = new();
         }
 
-        public bool AddConnection(ConnModel model)
+        public bool AddConnection(ListConnection model)
         {
             try
             {
@@ -39,7 +36,7 @@ namespace QueryDeveloper_WPF
             }
         }
 
-        public bool UpdateConnection(ConnModel model)
+        public bool UpdateConnection(ListConnection model)
         {
             try
             {
