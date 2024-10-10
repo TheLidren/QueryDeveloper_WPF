@@ -11,7 +11,7 @@ namespace QueryDeveloper_WPF
     /// </summary>
     public partial class ConnWindow : Window
     {
-        private ConnectionDB ConnDb;
+        private DataBaseManager ConnDb;
 
         static bool CheckedMethod(string[] values)
         {
@@ -27,8 +27,8 @@ namespace QueryDeveloper_WPF
         public ConnWindow()
         {
             InitializeComponent();
-            ConnDb = new ConnectionDB();
-            ListConn.ItemsSource = ConnDb.GetModels();
+            ConnDb = new DataBaseManager();
+            ListConn.ItemsSource = ConnDb.GetListConn();
         }
 
         private void AddConn_Click(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace QueryDeveloper_WPF
             string[] values = {nameBox.Text, descBox.Text, ConnectionString.Text };
             if (CheckedMethod(values)) 
             {
-                ConnDb.AddConnection(new ListConnection { Name = nameBox.Text, Description = descBox.Text, ConnectionString = ConnectionString.Text});
+                ConnDb.AddConnection(new ConnDataBase { Name = nameBox.Text, Description = descBox.Text, ConnectionString = ConnectionString.Text});
                 ListConn.Items.Refresh();
             } 
         }
@@ -44,7 +44,7 @@ namespace QueryDeveloper_WPF
 
         private void EditConn_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            var editItem = e.Row.Item as ListConnection;
+            var editItem = e.Row.Item as ConnDataBase;
             if (!ConnDb.UpdateConnection(editItem!))
                 e.Cancel = true;
             else

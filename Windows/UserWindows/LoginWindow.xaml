@@ -10,7 +10,7 @@
         Title="LoginWindow" MinHeight="300" MinWidth="600" Height="300" Width="600" SizeChanged="Window_SizeChanged">
     <Window.Resources>
         <command:OpenFormCommand x:Key="OpenFormCommand" />
-        <viewmodel:OpenFormViewModel x:Key="OpenFormViewModel" NewWindow="QueryDeveloper_WPF.RegisterWindow" OldWindow="QueryDeveloper_WPF.LoginWindow" CloseOldWindow="False" />
+        <viewmodel:OpenFormViewModel x:Key="OpenFormViewModel" NewWindow="QueryDeveloper_WPF.RegisterWindow" />
     </Window.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" MinHeight="30px">

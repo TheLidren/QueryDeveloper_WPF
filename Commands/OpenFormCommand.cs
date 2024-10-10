@@ -25,7 +25,7 @@ namespace QueryDeveloper_WPF.Commands
             {
                 ((Window)Activator.CreateInstance(Type.GetType(model.NewWindow)!)!).Show();
                 if (model.CloseOldWindow)
-                    ((Window)Activator.CreateInstance(Type.GetType(model.OldWindow)!)!).Close();
+                    model.OldWindow.Close();
             }
         }
     }

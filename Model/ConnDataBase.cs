@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QueryDeveloper_WPF.Model
 {
-    public class ListConnection
+    public class ConnDataBase
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

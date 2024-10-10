@@ -7,7 +7,7 @@
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserQuery> Quires { get; set; }
-        public DbSet<ListConnection> Connections { get; set; }
+        public DbSet<ConnDataBase> Connections { get; set; }
 
 
         public AppDbContext()
