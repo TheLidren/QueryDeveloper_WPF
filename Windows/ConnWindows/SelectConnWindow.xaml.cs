@@ -25,16 +25,19 @@ namespace QueryDeveloper_WPF.Windows.ConnWindows
     public partial class SelectConnWindow : Window
     {
         AppDbContext AppDbContext = new();
-        string query;
+        (string filePath, string fileName) queryFile;
         DataGrid _dataGrid;
+        TextBlock _nameBlock, _timeBlock;
         List<ConnDataBase> _listConnections;
         DataBaseManager _connectionDb;
+        User _currentUser;
 
-
-        public SelectConnWindow(DataGrid dataGrid)
+        public SelectConnWindow(DataGrid dataGrid, User currentUser, TextBlock nameBlock, TextBlock timeBlock)
         {
             InitializeComponent();
             _dataGrid = dataGrid;
+            _nameBlock = nameBlock;
+            _timeBlock = timeBlock;
             _listConnections =  AppDbContext.Connections.ToList();
             for (int i = 0; i < _listConnections.Count; i++) 
             {
@@ -48,24 +51,26 @@ namespace QueryDeveloper_WPF.Windows.ConnWindows
                 ListConnPanel.Children.Add(radioButton);
             }
             _connectionDb = new DataBaseManager();
+            _currentUser = currentUser;
         }
 
         private void SelectConn_Checked(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new();
             openFileDialog.Filter = "SQL files (*.sql)|*.sql";
+            openFileDialog.Title = "Выберите Sql-файл";
             if (openFileDialog.ShowDialog() == true)
             {
-                string FilePath = openFileDialog.FileName;
-                query = File.ReadAllText(FilePath);
+                queryFile = (openFileDialog.FileName, openFileDialog.SafeFileName);
             }
             RadioButton radioButton = (RadioButton)sender;
             ConnDataBase connDataBase = _listConnections.Where(x => x.Name == radioButton.Name).First();
-            
-            _dataGrid.ItemsSource = _connectionDb.ExecuteQuery(query, connDataBase.ConnectionString);
+
+            (_dataGrid.ItemsSource, _dataGrid.Tag) = _connectionDb.OpenQuery(queryFile, connDataBase, _currentUser);
+            _nameBlock.Text = queryFile.fileName;
+            _timeBlock.Text += "Время выполнения: " + DateTime.Now.ToLongTimeString();
             this.DialogResult = true;
             this.Close();
-            //this.Close();
         }
     }
 }

@@ -14,37 +14,45 @@
         <viewmodel:OpenFormViewModel x:Key="ConnWindowOpen" NewWindow="QueryDeveloper_WPF.ConnWindow" />
         <viewmodel:OpenFormViewModel x:Key="SelectConnWindowOpen" NewWindow="QueryDeveloper_WPF.Windows.ConnWindows.SelectConnWindow" />
         <DataTemplate x:Key="ListViewItemContextMenu">
-            <DataGrid  MinHeight="170">
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <!--<MenuItem Header="Открыть" Command="{StaticResource OpenFormCommand}" CommandParameter="{StaticResource SelectConnWindowOpen}"></MenuItem>-->
-                        <MenuItem Header="Открыть" Click="OpenQuery_Click"></MenuItem>
-                        <MenuItem Header="Закрыть" Click="CloseQuery_Click"></MenuItem>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <WrapPanel Grid.Row="0">
+                    <Button Click="StartQuery_Click">Старт</Button>
+                    <Button Click="StopQuery_Click">Стоп</Button>
+                    <Menu>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                            </MenuItem.Header>
+                            <MenuItem Header="10" Click="MenuItem_Click" IsChecked="True"></MenuItem>
+                            <MenuItem Header="30" Click="MenuItem_Click"></MenuItem>
+                            <MenuItem Header="45" Click="MenuItem_Click"></MenuItem>
+                            <MenuItem Header="60" Click="MenuItem_Click"></MenuItem>
+                        </MenuItem>
+                    </Menu>
+                    <TextBlock Text="Название запроса" TextDecorations="None"></TextBlock>
+                </WrapPanel>
+                <DataGrid  MinHeight="190" Grid.Row="1">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <!--<MenuItem Header="Открыть" Command="{StaticResource OpenFormCommand}" CommandParameter="{StaticResource SelectConnWindowOpen}"></MenuItem>-->
+                            <MenuItem Header="Открыть" Click="OpenQuery_Click"></MenuItem>
+                            <MenuItem Header="Редактировать" Click="EditQuery_Click"></MenuItem>
+                            <MenuItem Header="Закрыть" Click="CloseQuery_Click"></MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <TextBlock Grid.Row="3">Последнее время</TextBlock>
+            </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="HeaderQuery">
-            <WrapPanel>
-                <Button Click="StartQuery_Click">Старт</Button>
-                <Button Click="StopQuery_Click">Стоп</Button>
-                <Menu>
-                    <MenuItem>
-                        <MenuItem.Header>
-                            <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
-                        </MenuItem.Header>
-                        <MenuItem Header="10" Click="MenuItem_Click"></MenuItem>
-                        <MenuItem Header="30" Click="MenuItem_Click"></MenuItem>
-                        <MenuItem Header="45" Click="MenuItem_Click"></MenuItem>
-                        <MenuItem Header="60" Click="MenuItem_Click"></MenuItem>
-                    </MenuItem>
-                </Menu>
-                <TextBlock Text="Название запроса" TextDecorations="None"></TextBlock>
-            </WrapPanel>
+        <!--<DataTemplate x:Key="HeaderQuery">
         </DataTemplate>
         <DataTemplate x:Key="FooterQuery">
-            <TextBlock>Последнее время</TextBlock>
-        </DataTemplate>
+        </DataTemplate>-->
     </Window.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
@@ -75,9 +83,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.10*"/>
                 </Grid.RowDefinitions>
-                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="0" Grid.RowSpan="3" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <!--<ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
                 <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
-                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>-->
             </Grid>
             <GridSplitter Grid.Column="2" HorizontalAlignment="Stretch"></GridSplitter>
             <Grid Grid.Column="3" Background="White">
@@ -86,9 +95,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.10*"/>
                 </Grid.RowDefinitions>
-                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="0" Grid.RowSpan="3" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <!--<ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
                 <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
-                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>-->
             </Grid>
         </Grid>
         <GridSplitter Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
@@ -104,9 +114,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.10*"/>
                 </Grid.RowDefinitions>
-                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="0" Grid.RowSpan="3" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <!--<ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
                 <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
-                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>-->
             </Grid>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
             <Grid Grid.Column="2">
@@ -115,9 +126,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.10*"/>
                 </Grid.RowDefinitions>
-                <ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
+                <ContentControl Grid.Row="0" Grid.RowSpan="3" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
+                <!--<ContentControl Grid.Row="0" ContentTemplate="{StaticResource HeaderQuery}"/>
                 <ContentControl Grid.Row="1" ContentTemplate="{StaticResource ListViewItemContextMenu}"/>
-                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>
+                <ContentControl Grid.Row="2" ContentTemplate="{StaticResource FooterQuery}"/>-->
             </Grid>
         </Grid>
     </Grid>

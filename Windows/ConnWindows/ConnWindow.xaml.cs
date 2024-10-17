@@ -11,7 +11,8 @@ namespace QueryDeveloper_WPF
     /// </summary>
     public partial class ConnWindow : Window
     {
-        private DataBaseManager ConnDb;
+        DataBaseManager ConnDb;
+        User _currentUser;
 
         static bool CheckedMethod(string[] values)
         {

@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using QueryDeveloper_WPF.Model;
 using QueryDeveloper_WPF.ViewModel;
 using QueryDeveloper_WPF.Windows.ConnWindows;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,6 @@ namespace QueryDeveloper_WPF
         DataBaseManager ConnDB = new();
         AppDbContext AppDbContext = new AppDbContext();
         User CurrentUser;
-        string query;
 
         public MainWindow(User user)
         {
@@ -44,13 +44,31 @@ namespace QueryDeveloper_WPF
             MenuItem menuItem = sender as MenuItem;
             ContextMenu menu = menuItem.Parent as ContextMenu;
             DataGrid dataGrid = menu.PlacementTarget as DataGrid;
-            //data.ItemsSource = selectConnWindow()            
-            SelectConnWindow selectConnWindow = new(dataGrid);
+            Grid grid = dataGrid.Parent as Grid;
+            WrapPanel wrapPanel = grid.Children.OfType<WrapPanel>().FirstOrDefault();
+            TextBlock nameBlock = wrapPanel.Children.OfType<TextBlock>().FirstOrDefault()!;
+            TextBlock timeBlock = grid.Children.OfType<TextBlock>().FirstOrDefault()!;
+            SelectConnWindow selectConnWindow = new(dataGrid, CurrentUser, nameBlock, timeBlock);
             selectConnWindow.ShowDialog();
         }
 
         private void CloseQuery_Click(object sender, RoutedEventArgs e)
         {
+            MenuItem menuItem = sender as MenuItem;
+            ContextMenu menu = menuItem.Parent as ContextMenu;
+            DataGrid? dataGrid = menu.PlacementTarget as DataGrid;
+            Grid grid = dataGrid.Parent as Grid;
+            if (dataGrid.Tag is DataBaseViewModel model)
+            {
+                AppDbContext.Quires.Remove(model.UserQuery);
+                AppDbContext.SaveChanges();
+            }
+            dataGrid.ItemsSource = null;
+            TextBlock timeBlock = grid.Children.OfType<TextBlock>().FirstOrDefault()!;
+            timeBlock.Text = "Последнее время: ";
+            WrapPanel wrapPanel = grid.Children.OfType<WrapPanel>().FirstOrDefault();
+            TextBlock nameBlock = wrapPanel.Children.OfType<TextBlock>().FirstOrDefault()!;
+            nameBlock.Text = "Название запроса";
 
         }
 
@@ -61,6 +79,15 @@ namespace QueryDeveloper_WPF
 
         private void StartQuery_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            WrapPanel wrapPanel = button.Parent as WrapPanel;
+            Grid grid = wrapPanel.Parent as Grid;
+            DataGrid dataGrid = grid.Children.OfType<DataGrid>().FirstOrDefault();
+            DataBaseManager dataBase = new();
+            if (dataGrid.Tag is DataBaseViewModel model)
+                dataGrid.ItemsSource = dataBase.ExecuteQuery(model.ConnDataBase.ConnectionString, model.UserQuery);
+            TextBlock timeBlock = grid.Children.OfType<TextBlock>().FirstOrDefault()!;
+            timeBlock.Text = "Время выполнения: " + DateTime.Now.ToLongTimeString();
 
         }
 
@@ -73,6 +100,17 @@ namespace QueryDeveloper_WPF
         {
             UserWindow userWindow = new(CurrentUser);
             userWindow.Show();
+
+        }
+
+        private void EditQuery_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            ContextMenu menu = menuItem.Parent as ContextMenu;
+            DataGrid? dataGrid = menu.PlacementTarget as DataGrid;
+            Grid grid = dataGrid.Parent as Grid;
+            if (dataGrid.Tag is DataBaseViewModel model)
+                Process.Start("C:\\Windows\\System32\\notepad.exe", model.UserQuery.Path);
 
         }
     }

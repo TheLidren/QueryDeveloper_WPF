@@ -12,5 +12,6 @@
 
         public ICollection<UserQuery> UserQueries { get; set; } = null!;
 
+
     }
 }
