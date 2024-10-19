@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿
+
+using System.Windows;
 
 namespace QueryDeveloper_WPF
 {
@@ -11,15 +13,4 @@ namespace QueryDeveloper_WPF
         {
         }
     }
-    public enum MyEnum
-    {
-        one = 5,
-        ten = 10,
-        twelve = 20,
-        thirty = 30,
-        forty_five = 45,
-        sexty = 60
-    }
-
-
 }

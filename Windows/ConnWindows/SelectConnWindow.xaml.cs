@@ -1,21 +1,8 @@
 ﻿using Microsoft.Win32;
 using QueryDeveloper_WPF.Model;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QueryDeveloper_WPF.Windows.ConnWindows
 {
@@ -60,15 +47,18 @@ namespace QueryDeveloper_WPF.Windows.ConnWindows
             openFileDialog.Filter = "SQL files (*.sql)|*.sql";
             openFileDialog.Title = "Выберите Sql-файл";
             if (openFileDialog.ShowDialog() == true)
-            {
                 queryFile = (openFileDialog.FileName, openFileDialog.SafeFileName);
-            }
             RadioButton radioButton = (RadioButton)sender;
             ConnDataBase connDataBase = _listConnections.Where(x => x.Name == radioButton.Name).First();
 
             (_dataGrid.ItemsSource, _dataGrid.Tag) = _connectionDb.OpenQuery(queryFile, connDataBase, _currentUser);
+            if (_dataGrid.ItemsSource is null && _dataGrid.Tag is null)
+            {
+                radioButton.IsChecked = false;
+                return;
+            }
             _nameBlock.Text = queryFile.fileName;
-            _timeBlock.Text += "Время выполнения: " + DateTime.Now.ToLongTimeString();
+            _timeBlock.Text = "Время выполнения: " + DateTime.Now.ToLongTimeString();
             this.DialogResult = true;
             this.Close();
         }

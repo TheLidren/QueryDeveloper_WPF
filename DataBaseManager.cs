@@ -4,7 +4,6 @@ using QueryDeveloper_WPF.ViewModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Windows;
 
 namespace QueryDeveloper_WPF
@@ -93,7 +92,7 @@ namespace QueryDeveloper_WPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\nПодключение не установлено!");
+                MessageBox.Show(ex.Message + "\nОшибка выполнения. Ты что-то выбрал не то.");
                 return (null, null);
             }
         }

@@ -1,7 +1,6 @@
 ﻿namespace QueryDeveloper_WPF.Model
 {
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
 
     public class AppDbContext : DbContext
     {
